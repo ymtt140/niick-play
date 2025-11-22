@@ -1,0 +1,22 @@
+# niick-play
+
+Personal playground repo for experiments, mini tools, and gaming-related projects.
+
+## What is this repo for?
+
+- Test code
+- Small scripts or bots
+- Assets (logos, images) for gaming pages
+- Anything I want to try
+
+## Folder ideas
+
+- `scripts/` – code files (Python, JS, etc.)
+- `assets/` – logos, images, design files
+- `notes/` – idea notes, plans
+
+## How I use this repo
+
+1. Create a new file or folder when I start something new
+2. Commit changes with a short message
+3. Let ChatGPT / Codex help me write or improve code
