@@ -4,137 +4,257 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NiiCk's Space</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- Arc Style Background Animation --- */
+        :root {
+            --primary: #8e2de2;
+            --secondary: #4a00e0;
+            --text: #f3f5ff;
+            --muted: rgba(243, 245, 255, 0.7);
+            --card: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.14);
+        }
+
+        * { box-sizing: border-box; }
+
         body {
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            color: white;
+            font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text);
             min-height: 100vh;
-            
-            /* ဒီနေရာက အရောင်တွေ ရွေ့နေအောင် လုပ်ပေးတဲ့နေရာပါ */
-            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #4a148c, #1a237e);
+            background: radial-gradient(circle at 20% 20%, rgba(142, 45, 226, 0.24), transparent 25%),
+                        radial-gradient(circle at 80% 0%, rgba(74, 0, 224, 0.22), transparent 25%),
+                        linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #4a148c, #1a237e);
             background-size: 400% 400%;
-            animation: gradientMove 15s ease infinite;
+            animation: gradientMove 16s ease infinite;
         }
 
-        /* အရောင်ရွေ့တဲ့ Animation */
         @keyframes gradientMove {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* --- Glassmorphism (မှန်ကြည်ပုံစံ) --- */
         .container {
-            max-width: 700px;
+            max-width: 960px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 48px 18px 64px;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
             text-align: center;
+            margin-bottom: 36px;
         }
 
-        /* ခေါင်းစဉ် */
         h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            font-size: clamp(2.6rem, 4vw, 3.4rem);
+            margin: 0;
             letter-spacing: -1px;
+            text-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
         }
 
-        p.bio {
+        .subtitle {
+            margin: 0;
+            color: var(--muted);
             font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 40px;
         }
 
-        /* ကတ်ပြားများကို မှန်ကြည်ပုံစံ လုပ်ခြင်း */
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 4px;
+        }
+
+        .pill {
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text);
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
         .glass-card {
-            background: rgba(255, 255, 255, 0.1); /* အဖြူရောင် ပါးပါးလေး */
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); /* အရိပ် */
-            backdrop-filter: blur(12px); /* နောက်ခံကို ဝါးသွားစေတာ (Blur) */
-            -webkit-backdrop-filter: blur(12px); /* Safari အတွက် */
-            border: 1px solid rgba(255, 255, 255, 0.15); /* ဘောင်ပါးပါးလေး */
-            transition: transform 0.3s ease;
+            background: var(--card);
+            border-radius: 18px;
+            padding: 18px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
-        /* ကတ်ကိုနှိပ်လိုက်ရင် ကြွတက်လာမယ့် Effect */
         .glass-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.24);
         }
 
-        img {
+        h3 {
+            margin: 0 0 12px;
+            font-size: 1.3rem;
+            letter-spacing: -0.2px;
+        }
+
+        .card-body {
+            color: var(--muted);
+            line-height: 1.5;
+            font-size: 0.97rem;
+        }
+
+        .media {
             width: 100%;
-            border-radius: 15px;
-            margin-bottom: 10px;
+            border-radius: 14px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .btn {
             display: inline-block;
-            margin-top: 10px;
-            padding: 12px 25px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
+            padding: 11px 18px;
+            border-radius: 12px;
+            background: linear-gradient(120deg, rgba(142, 45, 226, 0.95), rgba(74, 0, 224, 0.9));
+            color: #0a041d;
             text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: all 0.3s;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+
+        .btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            border: 1px solid var(--border);
+            box-shadow: none;
+        }
+
         .btn:hover {
-            background: #fff;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 18px 32px rgba(0, 0, 0, 0.28);
+        }
+
+        .stat-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 12px;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .stat span { color: var(--muted); font-weight: 500; }
+
+        footer {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-top: 32px;
+            opacity: 0.8;
+        }
+
+        iframe {
+            border: none;
+            border-radius: 14px;
+            width: 100%;
+            height: 315px;
+            border: 1px solid var(--border);
+        }
+
+        @media (max-width: 600px) {
+            .btn { width: 100%; text-align: center; }
+            iframe { height: 240px; }
         }
     </style>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DXR9Z0PV58"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DXR9Z0PV58"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-DXR9Z0PV58');
-</script>
+      gtag('config', 'G-DXR9Z0PV58');
+    </script>
 </head>
 <body>
 
     <div class="container">
-        <h1>NiiCk.</h1>
-        <p class="bio">Digital Playground & MLBB Memories</p>
+        <header>
+            <h1>NiiCk.</h1>
+            <p class="subtitle">Digital Playground · MLBB Memories · HT40 Commander</p>
+            <div class="pill-row">
+                <span class="pill">🎮 Rank: Mythic HT40</span>
+                <span class="pill">⚡ Playstyle: Hyper Carry</span>
+                <span class="pill">🚀 Motto: "One good fight changes the story."</span>
+            </div>
+        </header>
 
-        <div class="glass-card">
-            <h3>🎮 Best Moments</h3>
-            <img src="IMG_1867.png" alt="Gameplay" style="width:80%; max-width:400px; border-radius:15px;">
-            <p style="color: #ddd; font-size: 0.9rem;">My best gameplay ever.</p>
+        <div class="grid">
+            <div class="glass-card">
+                <h3>🎮 Best Moments</h3>
+                <img src="IMG_1867.png" alt="Gameplay" class="media">
+                <p class="card-body">A snapshot from my proudest MLBB performance—precise rotations, clean mechanics, and the clutch that sealed the win.</p>
+            </div>
+
+            <div class="glass-card">
+                <h3>📊 Match Stats</h3>
+                <ul class="stat-list">
+                    <li class="stat"><span>Average KDA</span> 6.1 / 2.4 / 8.3</li>
+                    <li class="stat"><span>Win Rate</span> 72%</li>
+                    <li class="stat"><span>Role Focus</span> Jungle / Gold Lane</li>
+                    <li class="stat"><span>Comfort Picks</span> Ling · Fanny · Claude</li>
+                </ul>
+            </div>
+
+            <div class="glass-card">
+                <h3>🌐 Connect</h3>
+                <p class="card-body">Follow along for new highlights, live scrims, and breakdowns of my favorite builds.</p>
+                <div class="btn-row">
+                    <a href="#" class="btn">GitHub</a>
+                    <a href="#" class="btn secondary">Social</a>
+                </div>
+            </div>
         </div>
 
-        <div class="glass-card">
-    <h3>🎬 Highlights</h3>
-
-    <iframe width="100%" height="315"
-        src="https://www.youtube.com/embed/A8tZ4APB4TY"
-        title="YouTube Shorts player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen>
-    </iframe>
-
-</div>
-
-        <div class="glass-card">
-            <h3>Connect</h3>
-            <a href="#" class="btn">GitHub Profile</a>
-            <a href="#" class="btn">Social Media</a>
-        </div>
-
-        <p style="font-size: 0.8rem; opacity: 0.5; margin-top: 50px;">
-            Designed by Ye Min Thu on iPad Pro
-        </p>
+        <footer>
+            Designed by Ye Min Thu on iPad Pro · Updated for NiiCk-HT40
+        </footer>
     </div>
 
 </body>
